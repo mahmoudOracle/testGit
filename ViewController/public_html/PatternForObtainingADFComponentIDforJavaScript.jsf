@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<!DOCTYPE html>
+<f:view xmlns:f="http://java.sun.com/jsf/core" xmlns:af="http://xmlns.oracle.com/adf/faces/rich">
+    <af:document title="PatternForObtainingADFComponentIDforJavaScript.jsf" id="d1">
+        <af:form id="f1">
+            <af:panelSplitter orientation="horizontal" splitterPosition="201" id="ps1">
+                <f:facet name="first">
+                    <!-- Left -->
+                    <af:panelGroupLayout id="pgl2">
+                        <af:panelGroupLayout id="pgl3">
+                            <af:button text="Invoke J" id="b4"/>
+                            <af:button text="Invoke Call Java Script" id="b3">
+                                <af:clientListener method="doSomeClientOp" type="action"/>
+                                <af:clientAttribute name="b1ClientId"
+                                                    value="#{patternForObtainingAdfComponentForJavaScript.clientButtonClientId}"/>
+                            </af:button>
+                        </af:panelGroupLayout>
+                        <af:button text="Call from JS " id="b2" clientComponent="true"
+                                   binding="#{patternForObtainingAdfComponentForJavaScript.clinetButtonForJavaScript}"/>
+                        <af:button text="Call From Java Script" id="b1" clientComponent="true"
+                                   binding="#{patternForObtainingAdfComponentForJavaScript.clientButton}"/>
+                    </af:panelGroupLayout>
+                </f:facet>
+                <f:facet name="second">
+                    <af:panelGridLayout id="pgl1">
+                        <af:gridRow height="100%" id="gr1">
+                            <af:gridCell width="100%" halign="stretch" valign="stretch" id="gc2">
+                                <!-- Content -->
+                            </af:gridCell>
+                            <af:gridCell width="100px" halign="stretch" valign="stretch" id="gc1">
+                                <!-- Right -->
+                            </af:gridCell>
+                        </af:gridRow>
+                    </af:panelGridLayout>
+                </f:facet>
+            </af:panelSplitter>
+        </af:form>
+    </af:document>
+    <af:resource type="javascript">function doSomeClientOp(actionEvent){
+  var actionComp = actionEvent.getSource();
+  var b1ClientId = actionComp.getProperty("b1ClientId"); 
+  var b1ComponentRef = AdfPage.PAGE.findComponentByAbsoluteId(b1ClientId);
+} </af:resource>
+</f:view>
